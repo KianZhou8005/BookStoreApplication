@@ -13,9 +13,9 @@ using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure DbContext to use InMemory database  
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    options.UseInMemoryDatabase("BookStoreInMemoryDb"));
 
 // Register Repositories  
 builder.Services.AddScoped<IBookRepository, BookRepository>();
@@ -79,3 +79,5 @@ app.UseAuthentication();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
